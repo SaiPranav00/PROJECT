@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Charging Stations - EVMatch</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* Reset & Base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-image: url('https://i.pinimg.com/736x/64/de/9c/64de9c65fa03b5120a861e36fd5dc76a.jpg'); /* Background image */
+      background-size: cover; /* Cover the entire page */
+      background-position: center; /* Center the image */
+      background-repeat: no-repeat; /* Prevent repeating the image */
+      color: #1b4332;
+    }
+
+    body.dark-mode {
+      background-color: #1a1a1a;
+      color: #e0ffe0;
+    }
+
+    /* Navbar */
+    .navbar {
+      background-color: rgba(45, 106, 79, 0.8); /* Semi-transparent background for navbar */
+      color: #ffffff;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-logo {
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-links a {
+      margin-left: 1.2rem;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    .nav-links a.active,
+    .nav-links a:hover {
+      color: #b7e4c7;
+    }
+    .nav-user {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .user-avatar i {
+      background-color: white;
+      color: #2d6a4f;
+      padding: 6px;
+      border-radius: 50%;
+    }
+
+    /* Charging Header */
+    .charging-header {
+      text-align: center;
+      padding: 2rem 1rem;
+      background-color: rgba(216, 243, 220, 0.8); /* Semi-transparent background */
+    }
+
+    /* Container */
+    .charging-container {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 2rem;
+      gap: 2rem;
+    }
+
+    /* Search Panel */
+    .search-panel {
+      flex: 1 1 300px;
+      background-color: rgba(241, 253, 245, 0.8); /* Semi-transparent background */
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 0.6rem;
+      border-radius: 8px;
+      border: 1px solid #95d5b2;
+    }
+    .search-btn, .current-location-btn {
+      background-color: #40916c;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+    }
+    .current-location-btn {
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+
+    .filter-group {
+      margin-top: 1.5rem;
+    }
+
+    .filter-group label {
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .checkbox-group label {
+      display: block;
+      margin: 0.3rem 0;
+    }
+
+    /* Map Container */
+    .map-container {
+      flex: 2 1 500px;
+      position: relative;
+    }
+
+    .map-placeholder {
+      background-color: rgba(216, 243, 220, 0.8); /* Semi-transparent background */
+      height: 300px;
+      border-radius: 12px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .map-placeholder i {
+      font-size: 2rem;
+    }
+
+    .map-legend {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .legend-dot.available { background-color: #2d6a4f; }
+    .legend-dot.occupied { background-color: #999; }
+    .legend-dot.maintenance { background-color: #d00000; }
+
+    /* Loader */
+    .loader {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 24px;
+      height: 24px;
+      border: 3px solid #74c69d;
+      border-top: 3px solid transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Station Cards */
+    .stations-list {
+      width: 100%;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      margin: 2rem 0 1rem;
+    }
+
+    .stations-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+
+    .station-card {
+      background: rgba(241, 253, 245, 0.8); /* Semi-transparent background */
+      border: 1px solid #b7e4c7;
+      border-radius: 10px;
+      padding: 1rem;
+    }
+
+    /* Dark Mode Styling */
+    .dark-mode .navbar,
+    .dark-mode .station-card,
+    .dark-mode .search-panel,
+    .dark-mode .map-placeholder {
+      background-color: #263238;
+      color: #e0ffe0;
+    }
+
+    .dark-mode .search-box input {
+      background-color: #37474f;
+      color: #fff;
+      border: 1px solid #81c784;
+    }
+
+    /* Toggle */
+    .dark-toggle {
+      background-color: #ffffff;
+      color: #2d6a4f;
+      border-radius: 20px;
+      padding: 5px 15px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .dark-toggle:hover {
+      background-color: #b7e4c7;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-logo">
+      <i class="fas fa-bolt"></i> <span>EVMatch</span>
+    </div>
+    <div class="nav-links">
+      <a href="#">Dashboard</a>
+      <a href="#">Browse EVs</a>
+      <a href="#">Compare</a>
+      <a href="#">Find My EV</a>
+      <a href="#" class="active">Charging Stations</a>
+    </div>
+    <div class="nav-user">
+      <div class="user-avatar"><i class="fas fa-user"></i></div>
+      <span>Welcome, Admin</span>
+      <button class="dark-toggle" onclick="toggleDarkMode()">🌓</button>
+    </div>
+  </nav>
+
+  <main class="main-content">
+    <div class="charging-header">
+      <h1>Charging Station Locator</h1>
+      <p>Find charging stations near you with real-time availability</p>
+    </div>
+
+    <div class="charging-container">
+      <!-- Left: Search -->
+      <div class="search-panel">
+        <div class="search-box">
+          <i class="fas fa-map-marker-alt"></i>
+          <input type="text" id="locationInput" placeholder="Enter location or address">
+          <button class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <button class="current-location-btn"><i class="fas fa-crosshairs"></i> Use Current Location</button>
+
+        <div class="filter-group">
+          <label>Charging Speed</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" checked> Level 1 (120V)</label>
+            <label><input type="checkbox" checked> Level 2 (240V)</label>
+            <label><input type="checkbox" checked> DC Fast Charging</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Network</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" checked> Tesla</label>
+            <label><input type="checkbox" checked> ChargePoint</label>
+            <label><input type="checkbox" checked> EVgo</label>
+          </div>
+        </div>
+
+        <div class="filter-group">
+          <label>Availability</label>
+          <div class="checkbox-group">
+            <label><input type="checkbox" checked> Available Now</label>
+            <label><input type="checkbox"> Show Occupied</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Map -->
+      <div class="map-container">
+        <div class="map-placeholder">
+          <div class="loader"></div>
+          <i class="fas fa-map"></i>
+          <h3>Interactive Map</h3>
+          <p>Charging stations will be displayed here</p>
+          <div class="map-legend">
+            <span><div class="legend-dot available"></div> Available</span>
+            <span><div class="legend-dot occupied"></div> Occupied</span>
+            <span><div class="legend-dot maintenance"></div> Maintenance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- List -->
+      <div class="stations-list">
+        <div class="list-header">
+          <h3>Nearby Charging Stations</h3>
+          <select>
+            <option>Sort by Distance</option>
+            <option>Sort by Availability</option>
+          </select>
+        </div>
+        <div class="stations-grid">
+          <div class="station-card">
+            <h4>Green Charge Hub</h4>
+            <p>Speed: Level 2</p>
+            <p>Status: <strong style="color: green;">Available</strong></p>
+          </div>
+          <div class="station-card">
+            <h4>CityFast Charge</h4>
+            <p>Speed: DC Fast</p>
+            <p>Status: <strong style="color: gray;">Occupied</strong></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+  </script>
+</body>
+</html>

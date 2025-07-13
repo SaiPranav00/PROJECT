@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare EVs - EVMatch</title>
+    <link rel="stylesheet" href="main-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-bolt"></i>
+                <span>EVMatch</span>
+            </div>
+            <div class="nav-links">
+                <a href="dashboard.html" class="nav-link">Dashboard</a>
+                <a href="browse.html" class="nav-link">Browse EVs</a>
+                <a href="compare.html" class="nav-link active">Compare</a>
+                <a href="quiz.html" class="nav-link">Find My EV</a>
+                <a href="charging.html" class="nav-link">Charging Stations</a>
+            </div>
+            <div class="nav-user">
+                <div class="user-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <span>Welcome, Admin</span>
+                <a href="index.html" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        <div class="compare-header">
+            <h1>Compare Electric Vehicles</h1>
+            <p>Side-by-side comparison of EV specifications and features</p>
+        </div>
+
+        <div class="compare-selector">
+            <div class="selector-grid">
+                <div class="vehicle-selector" id="selector1">
+                    <div class="selector-placeholder">
+                        <i class="fas fa-plus"></i>
+                        <span>Select First Vehicle</span>
+                    </div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="vehicle-selector" id="selector2">
+                    <div class="selector-placeholder">
+                        <i class="fas fa-plus"></i>
+                        <span>Select Second Vehicle</span>
+                    </div>
+                </div>
+                <div class="vs-divider">VS</div>
+                <div class="vehicle-selector" id="selector3">
+                    <div class="selector-placeholder">
+                        <i class="fas fa-plus"></i>
+                        <span>Select Third Vehicle</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="comparison-table" id="comparisonTable" style="display: none;">
+            <div class="table-header">
+                <div class="spec-column">Specifications</div>
+                <div class="vehicle-column" id="vehicle1Header"></div>
+                <div class="vehicle-column" id="vehicle2Header"></div>
+                <div class="vehicle-column" id="vehicle3Header"></div>
+            </div>
+            <div class="table-body" id="comparisonBody">
+                <!-- Comparison rows will be generated here -->
+            </div>
+        </div>
+
+        <div class="popular-comparisons">
+            <h2>Popular Comparisons</h2>
+            <div class="comparison-suggestions">
+                <div class="suggestion-card" onclick="loadComparison(['Tesla Model 3', 'BMW i4', 'Audi e-tron GT'])">
+                    <h3>Luxury Sedans</h3>
+                    <p>Tesla Model 3 vs BMW i4 vs Audi e-tron GT</p>
+                </div>
+                <div class="suggestion-card" onclick="loadComparison(['Tesla Model Y', 'BMW iX', 'Mercedes EQC'])">
+                    <h3>Premium SUVs</h3>
+                    <p>Tesla Model Y vs BMW iX vs Mercedes EQC</p>
+                </div>
+                <div class="suggestion-card"
+                    onclick="loadComparison(['Nissan Leaf', 'Volkswagen ID.4', 'Hyundai Kona Electric'])">
+                    <h3>Affordable Options</h3>
+                    <p>Nissan Leaf vs VW ID.4 vs Hyundai Kona</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Vehicle Selection Modal -->
+    <div id="vehicleModal" class="modal">
+        <div class="modal-content large">
+            <div class="modal-header">
+                <h3>Select Vehicle</h3>
+                <button class="close-modal" onclick="closeVehicleModal()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="vehicle-search">
+                    <input type="text" id="vehicleSearch" placeholder="Search vehicles...">
+                </div>
+                <div class="vehicle-list" id="vehicleList">
+                    <!-- Vehicle options will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="main-app.js"></script>
+    <script src="compare.js"></script>
+</body>
+
+</html>

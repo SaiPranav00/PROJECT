@@ -1004,7 +1004,7 @@
                 font-size: 2rem;
             }
 
-        }
+        } 
     </style>
 </head>
 
@@ -1306,7 +1306,7 @@
             
             popularEVs.forEach((ev, index) => {
                 const evCard = createEVCard(ev);
-                evCard.style.animationDelay = $`{index * 0.1}s`;
+                evCard.style.animationDelay = `${index * 0.1}s`;
                 popularEVsContainer.appendChild(evCard);
             });
         }

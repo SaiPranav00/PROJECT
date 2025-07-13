@@ -702,9 +702,10 @@ function compareEV(evId) {
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
-    notification.innerHTML = 
-     `<i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation' : 'info'}-circle"></i>
-        <span>${message}</span>`;
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check' : type === 'error' ? 'exclamation' : 'info'}-circle"></i>
+        <span>${message}</span>
+    `;
     
     document.body.appendChild(notification);
     

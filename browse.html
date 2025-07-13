@@ -1,18 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Browse EVs - EVMatch</title>
-    <link rel="stylesheet" href="main-styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-
-<body>
-    <nav class="navbar"><!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -67,7 +54,7 @@
 
         /* Header */
         .header {
-            background: rgba(249, 250, 251, 0.1);
+            background: rgba(16, 185, 129, 0.9);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(249, 250, 251, 0.2);
             position: sticky;
@@ -140,24 +127,26 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
+            left: 0;
+            width: 0;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(249, 250, 251, 0.2), transparent);
-            transition: left 0.5s ease;
+            background: rgba(5, 150, 105, 0.3);
+            transition: width 0.4s ease;
+            border-radius: 25px;
         }
 
         .nav-link:hover::before {
-            left: 100%;
+            width: 100%;
         }
 
         .nav-link:hover, .nav-link.active {
-            background: rgba(249, 250, 251, 0.2);
-            transform: translateY(-2px);
+            background: rgba(5, 150, 105, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.3);
         }
 
         .user-menu {
-            background: rgba(249, 250, 251, 0.2);
+            background: rgba(5, 150, 105, 0.4);
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -169,8 +158,9 @@
         }
 
         .user-menu:hover {
-            background: rgba(249, 250, 251, 0.3);
-            transform: rotate(360deg);
+            background: rgba(5, 150, 105, 0.6);
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
         }
 
         /* Hero Section */
@@ -517,11 +507,11 @@
             <nav class="nav">
                 <a href="#" class="logo">EVMatch</a>
                 <ul class="nav-links">
-                    <li><a href="#" class="nav-link">Dashboard</a></li>
-                    <li><a href="#" class="nav-link active">Browse EVs</a></li>
-                    <li><a href="#" class="nav-link">Compare</a></li>
-                    <li><a href="#" class="nav-link">Find My EV</a></li>
-                    <li><a href="#" class="nav-link">Charging Stations</a></li>
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="browse.html" class="nav-link active">Browse EVs</a></li>
+                    <li><a href="compare.html" class="nav-link">Compare</a></li>
+                    <li><a href="quiz.html" class="nav-link">Find My EV</a></li>
+                    <li><a href="charging.html" class="nav-link">Charging Stations</a></li>
                 </ul>
                 <div class="user-menu">👤</div>
             </nav>
@@ -715,7 +705,7 @@
                     const x = (mouseX - 0.5) * speed * 20;
                     const y = (mouseY - 0.5) * speed * 20;
                     
-                 element.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.1}deg)`;
+                    element.style.transform = `translate(${x}px, ${y}px) rotate(${x * 0.1}deg)`;
                 });
             });
 
@@ -734,129 +724,4 @@
         });
     </script>
 </body>
-</html>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <i class="fas fa-bolt"></i>
-                <span>EVMatch</span>
-            </div>
-            <div class="nav-links">
-                <a href="dashboard.html" class="nav-link">Dashboard</a>
-                <a href="browse.html" class="nav-link active">Browse EVs</a>
-                <a href="compare.html" class="nav-link">Compare</a>
-                <a href="quiz.html" class="nav-link">Find My EV</a>
-                <a href="charging.html" class="nav-link">Charging Stations</a>
-            </div>
-            <div class="nav-user">
-                <div class="user-avatar">
-                    <i class="fas fa-user"></i>
-                </div>
-                <span>Welcome, Admin</span>
-                <a href="index.html" class="logout-btn">
-                    <i class="fas fa-sign-out-alt"></i>
-                </a>
-            </div>
-        </div>
-    </nav>
-
-    <main class="main-content">
-        <div class="browse-header">
-            <h1>Browse Electric Vehicles</h1>
-            <p>Discover the perfect EV from our comprehensive database</p>
-        </div>
-
-        <div class="browse-container">
-            <aside class="filters-sidebar">
-                <div class="filter-section">
-                    <h3>Search</h3>
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="searchInput" placeholder="Search by make, model...">
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <h3>Price Range</h3>
-                    <div class="price-range">
-                        <input type="range" id="priceRange" min="20000" max="150000" value="150000">
-                        <div class="price-display">
-                            <span>$20,000</span>
-                            <span id="maxPrice">$150,000</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <h3>Make</h3>
-                    <div class="checkbox-group" id="makeFilters">
-                        <label><input type="checkbox" value="Tesla"> Tesla</label>
-                        <label><input type="checkbox" value="BMW"> BMW</label>
-                        <label><input type="checkbox" value="Audi"> Audi</label>
-                        <label><input type="checkbox" value="Mercedes"> Mercedes</label>
-                        <label><input type="checkbox" value="Volkswagen"> Volkswagen</label>
-                        <label><input type="checkbox" value="Nissan"> Nissan</label>
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <h3>Body Type</h3>
-                    <div class="checkbox-group" id="bodyTypeFilters">
-                        <label><input type="checkbox" value="Sedan"> Sedan</label>
-                        <label><input type="checkbox" value="SUV"> SUV</label>
-                        <label><input type="checkbox" value="Hatchback"> Hatchback</label>
-                        <label><input type="checkbox" value="Coupe"> Coupe</label>
-                        <label><input type="checkbox" value="Truck"> Truck</label>
-                    </div>
-                </div>
-
-                <div class="filter-section">
-                    <h3>Range (miles)</h3>
-                    <div class="range-filter">
-                        <input type="range" id="rangeFilter" min="100" max="500" value="500">
-                        <div class="range-display">
-                            <span>100+ miles</span>
-                            <span id="maxRange">500+ miles</span>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="clear-filters-btn" onclick="clearFilters()">
-                    <i class="fas fa-times"></i>
-                    Clear Filters
-                </button>
-            </aside>
-
-            <div class="results-section">
-                <div class="results-header">
-                    <div class="results-info">
-                        <span id="resultsCount">Loading...</span>
-                    </div>
-                    <div class="sort-options">
-                        <select id="sortSelect">
-                            <option value="name">Sort by Name</option>
-                            <option value="price-low">Price: Low to High</option>
-                            <option value="price-high">Price: High to Low</option>
-                            <option value="range">Range: High to Low</option>
-                            <option value="efficiency">Efficiency</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="results-grid" id="resultsGrid">
-                    <!-- EV cards will be loaded here -->
-                </div>
-
-                <div class="load-more">
-                    <button class="btn-secondary" onclick="loadMoreResults()">
-                        Load More Results
-                    </button>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="main-app.js"></script>
-    <script src="browse.js"></script>
-</body>
-
 </html>

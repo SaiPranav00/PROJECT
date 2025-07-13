@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EVMatch Premium Reviews</title>
+    <style>
+        /* Ferrari-inspired CSS with luxurious dark theme and yellow accents */
+        :root {
+            --primary: #ED1C24;  /* Ferrari Rosso */
+            --secondary: #FFD700;  /* Gold accent */
+            --dark: #0F0D0E;
+            --light: #F5F5F5;
+            --carbon: #2D2D2D;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(rgba(15, 13, 14, 0.8), rgba(15, 13, 14, 0.9)), 
+                        url('https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/534aba27-f888-4c38-a4ac-ebd3070949a1.png') center/cover no-repeat;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background: var(--primary);
+        }
+        
+        h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin: 0;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 1rem auto;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .reviews-container {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary);
+        }
+        
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        
+        .review-card {
+            background-color: var(--carbon);
+            border-radius: 8px;
+            overflow: hidden;
+            border-left: 4px solid var(--primary);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+        }
+        
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 14px 28px rgba(237, 28, 36, 0.2);
+        }
+        
+        .review-content {
+            padding: 2rem;
+        }
+        
+        .review-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .user-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--dark);
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--secondary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            border: 2px solid var(--secondary);
+        }
+        
+        .user-info {
+            flex: 1;
+        }
+        
+        .user-name {
+            font-weight: 600;
+            margin: 0;
+            color: var(--light);
+        }
+        
+        .user-location {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin: 0;
+        }
+        
+        .rating {
+            color: var(--secondary);
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .stars {
+            margin-right: 0.5rem;
+        }
+        
+        .review-text {
+            margin: 1.5rem 0;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.7;
+        }
+        
+        .review-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .verified {
+            color: var(--secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+        }
+        
+        .verified::before {
+            content: '✓';
+            margin-right: 0.3rem;
+        }
+        
+        .stats-bar {
+            background-color: var(--primary);
+            padding: 3rem 2rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .stats-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 1rem;
+            margin: 0.5rem 0 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        /* Review Form Styles */
+        form {
+            background-color: var(--carbon);
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 3rem auto;
+            max-width: 800px;
+            box-shadow: 0 4px 20px rgba(237, 28, 36, 0.3);
+            border-top: 3px solid var(--secondary);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 1.5rem;
+            border: 1px solid var(--secondary);
+            border-radius: 4px;
+            background-color: var(--dark);
+            color: var(--light);
+            font-size: 1rem;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary), #c00);
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(237, 28, 36, 0.4);
+        }
+
+        .thank-you-message {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--carbon);
+            border-radius: 8px;
+            margin: 3rem auto;
+            max-width: 800px;
+            border-top: 3px solid var(--secondary);
+        }
+
+        .thank-you-message h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                height: 50vh;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 2rem;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <h1>EV<span style="color: var(--secondary)">Match</span></h1>
+            <p class="subtitle">Premium charging experiences with the performance you expect. See what our members say about our exclusive network.</p>
+        </div>
+    </div>
+    
+    <div class="reviews-container">
+        <h2 class="section-title">Member Testimonials</h2>
+        
+        <div class="reviews-grid">
+            <!-- Review 1 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">JB</div>
+                        <div class="user-info">
+                            <h3 class="user-name">James Blackwell</h3>
+                            <p class="user-location">Los Angeles, CA</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0</span>
+                    </div>
+                    <p class="review-text">
+                        The EVMatch app provided the fastest charging experience I've ever had. Found a premium station near Rodeo Drive with 350kW capability - my Taycan went from 10% to 80% in under 18 minutes. The lounge area with complimentary espresso is a game changer.
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>Today</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review 2 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">AR</div>
+                        <div class="user-info">
+                            <h3 class="user-name">Aisha Rahman</h3>
+                            <p class="user-location">Miami, FL</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <span>4.5</span>
+                    </div>
+                    <p class="review-text">
+                        As a luxury real estate agent constantly on the road, I need reliable charging options with premium amenities. EVMatch's valet charging service at their South Beach location saved me during back-to-back showings. The concierge even detailed my Model S while it charged!
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>1 week ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review 3 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">MT</div>
+                        <div class="user-info">
+                            <h3 class="user-name">Marcus Tanaka</h3>
+                            <p class="user-location">New York, NY</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0</span>
+                    </div>
+                    <p class="review-text">
+                        The penthouse charging lounge in Manhattan is worth every penny. While my Lucid Air was charging, I conducted two business meetings in their soundproof pods with stunning skyline views. The biometric entry system makes everything seamless and secure.
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>2 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review 4 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">SG</div>
+                        <div class="user-info">
+                            <h3 class="user-name">Sophia Garcia</h3>
+                            <p class="user-location">Austin, TX</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0</span>
+                    </div>
+                    <p class="review-text">
+                        The Tesla Supercharger network has nothing on EVMatch's premium stations. I routinely get 250kW+ charging speeds at their Austin location, with a wine bar and rooftop garden to enjoy while waiting. Their reservation system ensures I never wait in line like at public chargers.
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>3 weeks ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review 5 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">DL</div>
+                        <div class="user-info">
+                            <h3 class="user-name">David Lawson</h3>
+                            <p class="user-location">Chicago, IL</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                        </div>
+                        <span>4.0</span>
+                    </div>
+                    <p class="review-text">
+                        Excellent app interface and station quality, though I wish there were more locations in downtown Chicago. The one at the Wrigley Building is phenomenal - heated charging cables in winter are a brilliant touch. Just need a few more stations on the north side.
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>1 month ago</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Review 6 -->
+            <div class="review-card">
+                <div class="review-content">
+                    <div class="review-header">
+                        <div class="user-avatar">EC</div>
+                        <div class="user-info">
+                            <h3 class="user-name">Elena Chen</h3>
+                            <p class="user-location">San Francisco, CA</p>
+                        </div>
+                    </div>
+                    <div class="rating">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <span>5.0</span>
+                    </div>
+                    <p class="review-text">
+                        Game-changing service for Bay Area tech executives. Their SOMA station has private charging bays with high-speed WiFi and soundproofing - I regularly take VC calls while my EQS charges. The automated stall cleaning after each use shows attention to detail you won't find elsewhere.
+                    </p>
+                    <div class="review-meta">
+                        <span class="verified">Verified Member</span>
+                        <span>2 months ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Review Submission Form -->
+        <div class="reviews-container">
+            <h2 class="section-title">Share Your Experience</h2>
+            
+            <form id="review-form">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name" required />
+
+                <label for="model">EV Model</label>
+                <input type="text" id="model" placeholder="e.g. Tata Nexon EV" required />
+
+                <label for="rating">Rating</label>
+                <select id="rating" required>
+                    <option value="">Select Rating</option>
+                    <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                    <option value="4">⭐⭐⭐⭐ (Great)</option>
+                    <option value="3">⭐⭐⭐ (Good)</option>
+                    <option value="2">⭐⭐ (Fair)</option>
+                    <option value="1">⭐ (Poor)</option>
+                </select>
+
+                <label for="review">Your Review</label>
+                <textarea id="review" rows="5" placeholder="Tell us about your EV charging experience..." required></textarea>
+
+                <button type="submit">Submit Review</button>
+            </form>
+
+            <div class="thank-you-message">
+                <h3>Thank You For Your Review! 🚀</h3>
+                <p>We appreciate you taking the time to share your experience with EVMatch. Your feedback helps us improve our services.</p>
+            </div>
+        </div>
+
+    <div class="stats-bar">
+        <div class="stats-container">
+            <div class="stat-item">
+                <p class="stat-number">9.8/10</p>
+                <p class="stat-label">Member Satisfaction</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">99.7%</p>
+                <p class="stat-label">Charge Success Rate</p>
+            </div>
+            <div class="stat-item">
+                <p class="stat-number">450+</p>
+                <p class="stat-label">Premium Stations</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Handle form submission
+        document.getElementById('review-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            this.style.display = 'none';
+            document.querySelector('.thank-you-message').style.display = 'block';
+        });
+
+        // Animate review cards on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const reviewCards = document.querySelectorAll('.review-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            reviewCards.forEach(card => {
+                card.style.opacity = 0;
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+                observer.observe(card);
+            });
+            
+            // Ferrari-style speed animation for stats
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = stat.textContent;
+                stat.textContent = '0';
+                
+                const animate = () => {
+                    const current = parseFloat(stat.textContent);
+                    const increment = parseFloat(target.replace(/[^0-9.]/g, '')) / 30;
+                    
+                    if (current < parseFloat(target.replace(/[^0-9.]/g, ''))) {
+                        stat.textContent = (current + increment).toFixed(target.includes('.') ? 1 : 0) + (target.includes('/') ? '/10' : target.includes('%') ? '%' : '');
+                        requestAnimationFrame(animate);
+                    } else {
+                        stat.textContent = target;
+                    }
+                };
+                
+                setTimeout(animate, 500);
+            });
+        });
+    </script>
+</body>
+</html>

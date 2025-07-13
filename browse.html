@@ -130,7 +130,7 @@
             left: 0;
             width: 0;
             height: 100%;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(5, 150, 105, 0.3);
             transition: width 0.4s ease;
             border-radius: 25px;
         }
@@ -140,12 +140,13 @@
         }
 
         .nav-link:hover, .nav-link.active {
-            background: transparent;
-            transform: translateY(-2px);
+            background: rgba(5, 150, 105, 0.4);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.3);
         }
 
         .user-menu {
-            background: rgba(34, 197, 94, 0.3);
+            background: rgba(5, 150, 105, 0.4);
             border-radius: 50%;
             width: 40px;
             height: 40px;
@@ -157,8 +158,9 @@
         }
 
         .user-menu:hover {
-            background: rgba(34, 197, 94, 0.5);
+            background: rgba(5, 150, 105, 0.6);
             transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(5, 150, 105, 0.4);
         }
 
         /* Hero Section */
@@ -503,7 +505,7 @@
     <header class="header">
         <div class="container">
             <nav class="nav">
-                <a href="dashboard.html" class="logo">EVMatch</a>
+                <a href="#" class="logo">EVMatch</a>
                 <ul class="nav-links">
                     <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
                     <li><a href="browse.html" class="nav-link active">Browse EVs</a></li>

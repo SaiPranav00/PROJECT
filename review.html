@@ -107,9 +107,11 @@
 
         nav {
             display: flex;
+            box-shadow: 0 12px 20px #10b981; /* thick green shadow */
+             
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
+            
             margin: 0 auto;
             padding: 1rem 2rem;
         }
@@ -574,27 +576,25 @@
     </style>
 </head>
 <body>
-    <div class="bg-particles"></div>
     
-    <header>
-        <nav>
-            <a href="#" class="logo">
-                <span class="logo-icon">⚡</span>
-                EVMatch
-            </a>
-            <ul class="nav-links">
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="browse.html">Browse EVs</a></li>
-                <li><a href="compare.html">Compare</a></li>
-                <li><a href="quiz.html">Find My EV</a></li>
-                <li><a href="charging.html" class="active">Charging Stations</a></li>
-            </ul>
-            <div class="user-menu">
-                <span>Welcome, Admin</span>
-                <div class="user-icon">👤</div>
-            </div>
-        </nav>
+
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="index.html" class="logo">EVMatch</a>
+                <ul class="nav-links">
+                    <li><a href="dashboard.html" class="nav-link">Dashboard</a></li>
+                    <li><a href="browse.html" class="nav-link active">Browse EVs</a></li>
+                    <li><a href="compare.html" class="nav-link">Compare</a></li>
+                    <li><a href="quiz.html" class="nav-link">Find My EV</a></li>
+                    <li><a href="charging.html" class="nav-link">Charging Stations</a></li>
+                    <li><a href="review.html"class="nav-link">Reviews</a>
+                </ul>
+                <div class="user-menu">👤</div>
+            </nav>
+        </div>
     </header>
+
 
     <section class="hero-section">
         <h1 class="hero-title">EVMATCH</h1>

@@ -161,7 +161,9 @@ function applySort() {
             filteredEVs.sort((a, b) => b.efficiency - a.efficiency);
             break;
         default:
-            filteredEVs.sort((a, b) => `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`));
+            filteredEVs.sort((a, b) =>
+                `${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`)
+            );
     }
 
     loadResults();
@@ -225,4 +227,3 @@ function loadMoreResults() {
     currentPage++;
     loadResults();
 }
-  

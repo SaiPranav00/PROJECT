@@ -55,11 +55,11 @@ const quizData = {
             question: "What is your typical daily driving distance?",
             type: "single",
             options: [
-                { value: "under-25", text: "Under 25 miles", icon: "🏠" },
-                { value: "25-50", text: "25-50 miles", icon: "🚗" },
-                { value: "50-100", text: "50-100 miles", icon: "🛣️" },
-                { value: "100-200", text: "100-200 miles", icon: "🌍" },
-                { value: "over-200", text: "Over 200 miles", icon: "✈️" }
+                { value: "under-25", text: "Under 25 km", icon: "🏠" },
+                { value: "25-50", text: "25-50 km", icon: "🚗" },
+                { value: "50-100", text: "50-100 km", icon: "🛣️" },
+                { value: "100-200", text: "100-200 km", icon: "🌍" },
+                { value: "over-200", text: "Over 200 km", icon: "✈️" }
             ]
         },
         {
